@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # 添加每日 08:00 执行报天气任务
     scheduler.add_job(
         send_wechat_template_message, 'cron', 
-        args=[get_weather_data(), ""], hour=8, minute=0
+        args=[get_weather_data, ""], hour=8, minute=0
     )
     
     logging.info("Start")

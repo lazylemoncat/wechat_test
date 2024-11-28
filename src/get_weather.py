@@ -39,6 +39,8 @@ def get_weather_data() -> dict:
     date = datetime.datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d')
     # 获取天气信息
     weather = get_weather(city_code, api_key)
+    if not weather:
+        return {}
 
     # 设置模板消息数据
     data = {
@@ -61,7 +63,20 @@ def get_weather_data() -> dict:
             'value': weather['text_night'],
         },
     }
+    logging.info(f"Got weather data: {data}, date: {date}")
     return data
 
 if __name__ == "__main__":
+    from apscheduler.schedulers.blocking import BlockingScheduler
+    from send_template import send_wechat_template_message
     print(get_weather_data())
+    # 设置定时任务调度器
+    scheduler = BlockingScheduler(timezone=timezone(envConfig.timezone))
+    # 添加执行报天气任务
+    scheduler.add_job(
+        send_wechat_template_message, 'interval', 
+        args=[get_weather_data, ""], minutes=1
+    )
+    
+    logging.info("Start")
+    scheduler.start()

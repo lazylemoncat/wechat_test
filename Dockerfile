@@ -13,4 +13,4 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 指定默认启动命令
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]

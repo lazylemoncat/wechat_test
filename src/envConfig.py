@@ -23,5 +23,5 @@ envConfig = EnvConfig(
     weather_city_code=os.getenv('WEATHER_CITY_CODE', ''),
     weather_city=os.getenv('WEATHER_CITY', ''),
     weather_api_key=os.getenv('WEATHER_API_KEY', ''),
-    timezone=os.getenv('TIMEZONE', '') if os.getenv('TIMEZONE') != '' else 'Asia/Shanghai'
+    timezone=os.getenv('TIMEZONE', 'Asia/Shanghai') if os.getenv('TIMEZONE') != '' else 'Asia/Shanghai'
 )
