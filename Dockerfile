@@ -5,7 +5,7 @@ FROM python:3.11.1
 WORKDIR /app
 
 # 复制项目文件到容器
-COPY *.py /app/
+COPY src/ /app/
 # 复制依赖文件
 COPY requirements.txt /app/requirements.txt
 
@@ -13,4 +13,4 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 指定默认启动命令
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
