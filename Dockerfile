@@ -5,7 +5,9 @@ FROM python:3.11.1
 WORKDIR /app
 
 # 复制项目文件到容器
-COPY *.py /app/
+COPY src/ /app/
+# 复制配置文件
+COPY config/ /app/config/
 # 复制依赖文件
 COPY requirements.txt /app/requirements.txt
 

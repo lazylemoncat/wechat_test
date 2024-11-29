@@ -4,12 +4,6 @@ import logging
 from pytz import timezone
 from envConfig import envConfig
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, 
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
 # 发送模板消息
 def send_wechat_template_message(data: dict, url='') -> dict:
     access_token = get_access_token()
@@ -18,6 +12,8 @@ def send_wechat_template_message(data: dict, url='') -> dict:
         f"?access_token={access_token}"
     )
     payload = create_message_json(data, url)
+    logging.info(f"Sending message: {payload}")
+    logging.info(f"data is {data}")
     response = requests.post(post_url, json=payload)
     log_response(response)
     return response.json()
